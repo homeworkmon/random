@@ -10,20 +10,7 @@ import re
 
 xml_file = feedparser.parse('/home/monica/Documents/Python/XML/Donor.xml')
 
-for i, entry in enumerate(xml_file.entries):
-    
-    title = xml_file.entries[i]['title']
-    
-    title = title.replace("/", "-") #remove / that confuses file path
-    
-    content = xml_file.entries[i]['content'][0]['value']
-    
-    content = content.replace("<span>","<p>") #replace spans w p tag
-    content = content.replace("</span>","</p>")
-    
-    article = re.sub(r"<!--(.*?)-->",'', content) #remove xml comment
-    
-    #function checks for ul or ol element and adds p tags where applicable
+ #function checks for ul or ol element and adds p tags where applicable
     def listCheck(article):
         if re.search(r"<ul>[\s\S]*?</ul>", article):
             print(title + " has UL")
@@ -48,6 +35,19 @@ for i, entry in enumerate(xml_file.entries):
         article = (''.join(article))
         #print(article)
         return article
+
+for i, entry in enumerate(xml_file.entries):
+    
+    title = xml_file.entries[i]['title']
+    
+    title = title.replace("/", "-") #remove / that confuses file path
+    
+    content = xml_file.entries[i]['content'][0]['value']
+    
+    content = content.replace("<span>","<p>") #replace spans w p tag
+    content = content.replace("</span>","</p>")
+    
+    article = re.sub(r"<!--(.*?)-->",'', content) #remove xml comment
     
     article = listCheck(article)
     
