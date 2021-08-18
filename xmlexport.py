@@ -4,6 +4,8 @@
 Created on Sat May 15 12:59:23 2021
 
 @author: monica
+
+purpose: to read wordpress XML export and parse each article title and text from XML into individual HTML files to be uploaded to Salesforce Knowledge Base
 """
 import feedparser
 import re
